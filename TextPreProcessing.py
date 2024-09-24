@@ -20,4 +20,18 @@ import nltk
 nltk.download("stopwords")
 swords = stopwords.words('english')
 df["Review"]=df["Review"].apply(lambda x: " ".join(x for x in str(x).split() if x not in swords))
+#print(df["Review"])
+
+
+
+#clearing text from rarewords
+
+temp_df =pd.Series(" ".join(df["Review"]).split()).value_counts()[-1000:]
+print(temp_df)
+df["Review"]=df["Review"].apply(lambda x: " ".join(x for x in str(x).split() if x not in temp_df))
 print(df["Review"])
+
+
+
+
+
