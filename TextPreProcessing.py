@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 from nltk.corpus import stopwords
-
+from nltk.stem import WordNetLemmatizer
 
 df = pd.read_excel('amazon.xlsx')
 df["Review"] = (df['Review'].str.lower())
@@ -27,9 +27,20 @@ df["Review"]=df["Review"].apply(lambda x: " ".join(x for x in str(x).split() if 
 #clearing text from rarewords
 
 temp_df =pd.Series(" ".join(df["Review"]).split()).value_counts()[-1000:]
-print(temp_df)
+#print(temp_df)
 df["Review"]=df["Review"].apply(lambda x: " ".join(x for x in str(x).split() if x not in temp_df))
+#print(df["Review"])
+
+
+#lemmatization
+nltk.download("wordnet")
+lemmatizer = WordNetLemmatizer()
+df["Review"] = df["Review"].apply(lambda x: " ".join([lemmatizer.lemmatize(word) for word in x.split()]))
 print(df["Review"])
+
+
+
+
 
 
 
