@@ -36,7 +36,12 @@ df["Review"]=df["Review"].apply(lambda x: " ".join(x for x in str(x).split() if 
 nltk.download("wordnet")
 lemmatizer = WordNetLemmatizer()
 df["Review"] = df["Review"].apply(lambda x: " ".join([lemmatizer.lemmatize(word) for word in x.split()]))
-print(df["Review"])
+#print(df["Review"])
+
+# tokenization
+nltk.download("punkt")
+df['reviewText'].apply(lambda x: TextBlob(x).words).head()
+print(df['reviewText'])
 
 
 
