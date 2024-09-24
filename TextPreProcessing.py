@@ -1,7 +1,9 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from textblob import Word, TextBlob
 
 df = pd.read_excel('amazon.xlsx')
 df["Review"] = (df['Review'].str.lower())
@@ -38,10 +40,10 @@ lemmatizer = WordNetLemmatizer()
 df["Review"] = df["Review"].apply(lambda x: " ".join([lemmatizer.lemmatize(word) for word in x.split()]))
 #print(df["Review"])
 
-# tokenization
-nltk.download("punkt")
-df['reviewText'].apply(lambda x: TextBlob(x).words).head()
-print(df['reviewText'])
+
+
+
+
 
 
 
